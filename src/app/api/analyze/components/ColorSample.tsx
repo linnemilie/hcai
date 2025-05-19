@@ -1,7 +1,7 @@
 "use client";
 import { AccessibilityFeedbackDialog } from "./AccessibilityFeedbackDialog";
 import { useState, useEffect, useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Popover,
   PopoverContent,
@@ -38,7 +38,7 @@ interface ColorSamplesContainerProps {
   results: Array<{
     text_color: string;
     background_color: string;
-    contrast_ratio: number;
+    contrast_ratio: number | "mixed";
   }>;
 }
 
@@ -55,7 +55,6 @@ export default function ColorSamplesContainer({
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [feedback, setFeedback] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   // Function to scroll to bottom of container
   const scrollToBottom = () => {
@@ -119,7 +118,8 @@ export default function ColorSamplesContainer({
         oldFirstResult.background_color !== newFirstResult.background_color
       );
     }
-  }, [results]);
+    // }, [results]);
+  }, [results, previousResultsLength]);
 
   const addManualSample = () => {
     // Default colors for a new sample
@@ -387,7 +387,8 @@ export default function ColorSamplesContainer({
                   const contrastRatio = customColor
                     ? customColor.contrastRatio
                     : result.contrast_ratio;
-                  const isGoodContrast = contrastRatio >= 4.5;
+                  const isGoodContrast =
+                    typeof contrastRatio === "number" && contrastRatio >= 4.5;
 
                   return (
                     <div
@@ -420,7 +421,10 @@ export default function ColorSamplesContainer({
                               isGoodContrast ? "text-green-700" : "text-red-600"
                             }`}
                           >
-                            Contrast ratio: {contrastRatio.toFixed(2)}
+                            Contrast ratio:{" "}
+                            {typeof contrastRatio === "number"
+                              ? contrastRatio.toFixed(2)
+                              : "mixed"}
                             {isGoodContrast ? " ✓" : " ✗"}
                           </div>
                         </div>
@@ -559,7 +563,7 @@ export function ColorSample({
     // Check if the EyeDropper API is available
     if ("EyeDropper" in window) {
       try {
-        // @ts-ignore - EyeDropper is not in the standard TS types yet
+        // @ts-expect-error - EyeDropper is not in the standard TS types yet
         const eyeDropper = new window.EyeDropper();
         const result = await eyeDropper.open();
         if (colorType === "text") {

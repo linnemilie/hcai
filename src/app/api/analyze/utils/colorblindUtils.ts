@@ -4,17 +4,17 @@
  */
 
 // Constants: Transformation matrices
-const RGB_TO_LMS = [
-  [17.8824, 43.5161, 4.11935],
-  [3.45565, 27.1554, 3.86714],
-  [0.0299566, 0.184309, 1.46709],
-];
+// const RGB_TO_LMS = [
+//   [17.8824, 43.5161, 4.11935],
+//   [3.45565, 27.1554, 3.86714],
+//   [0.0299566, 0.184309, 1.46709],
+// ];
 
-const LMS_TO_RGB = [
-  [0.080944, -0.130504, 0.116721],
-  [-0.0102485, 0.0540194, -0.113615],
-  [-0.000365294, -0.00412163, 0.693513],
-];
+// const LMS_TO_RGB = [
+//   [0.080944, -0.130504, 0.116721],
+//   [-0.0102485, 0.0540194, -0.113615],
+//   [-0.000365294, -0.00412163, 0.693513],
+// ];
 
 // Converts hex to RGB [0-255]
 export const hexToRgb = (hex: string): number[] => {
@@ -69,7 +69,7 @@ export const gammaCorrect = (rgb: number[], inverse = false): number[] => {
 // Type for colorblind types
 export type ColorblindType =
   | "protanopia"
-  | "deuteranopia" 
+  | "deuteranopia"
   | "tritanopia"
   | "achromatopsia"
   | "colors";
@@ -97,7 +97,7 @@ const COLORBLIND_MATRICES = {
   achromatopsia: [
     [0.299, 0.587, 0.114],
     [0.299, 0.587, 0.114],
-    [0.299, 0.587, 0.114]
+    [0.299, 0.587, 0.114],
   ],
 };
 

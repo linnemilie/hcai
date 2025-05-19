@@ -4,9 +4,15 @@ import { useState } from "react";
 import ImageAnalyzer from "./api/analyze/components/imageAnalyzer";
 import ColorSamplesContainer from "./api/analyze/components/ColorSample";
 
+interface ContrastResult {
+  text_color: string;
+  background_color: string;
+  contrast_ratio: number | "mixed"; // Can be a number or "mixed" for mixed backgrounds
+}
+
 export default function Home() {
   // Shared state to be passed between components
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<ContrastResult[]>([]);
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-[#F2EFE9] p-4 pt-8">

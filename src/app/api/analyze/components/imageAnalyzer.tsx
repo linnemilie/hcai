@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Loader2, AlertCircle, TriangleAlert } from "lucide-react";
+import { Loader2, TriangleAlert } from "lucide-react";
 import { Info } from "lucide-react";
 import {
   Tooltip,
@@ -19,20 +19,25 @@ import {
 } from "@/components/ui/tooltip";
 import { AccessibilityFeedbackDialog } from "./AccessibilityFeedbackDialog";
 
+interface ContrastResult {
+  text_color: string;
+  background_color: string;
+  contrast_ratio: number | "mixed"; // Can be a number or "mixed" for mixed backgrounds
+}
+
 interface ImageAnalyzerProps {
-  onResultsChange?: (results: any[]) => void;
+  onResultsChange?: (results: ContrastResult[]) => void;
 }
 
 export default function ImageAnalyzer({ onResultsChange }: ImageAnalyzerProps) {
   const [image, setImage] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<ContrastResult[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [textSizes, setTextSizes] = useState<{ [key: number]: string }>({});
   const [feedbackOpen, setFeedbackOpen] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [feedbackLoading, setFeedbackLoading] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); // For error messages
   const [accessibilityFeedback, setAccessibilityFeedback] = useState<{
     summary: string;
     issues: { severity: "high" | "medium" | "low"; description: string }[];

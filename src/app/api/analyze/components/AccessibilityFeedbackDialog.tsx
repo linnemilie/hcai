@@ -8,13 +8,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import {
-  Lightbulb,
-  BarChart,
-  AlertTriangle,
-  CheckCircle,
-  Copy,
-} from "lucide-react";
+import { Lightbulb, BarChart, CheckCircle, Copy } from "lucide-react";
 
 interface AccessibilityFeedbackDialogProps {
   open: boolean;
@@ -90,7 +84,6 @@ export function AccessibilityFeedbackDialog({
 
   // Make sure all required properties exist
   const summary = feedback.summary || "No summary provided";
-  const issues = Array.isArray(feedback.issues) ? feedback.issues : [];
   const recommendations = Array.isArray(feedback.recommendations)
     ? feedback.recommendations
     : [];
@@ -181,7 +174,7 @@ export function AccessibilityFeedbackDialog({
             <div>
               <h3 className="text-md font-medium mb-2 flex items-center gap-2">
                 <CheckCircle className="h-4 w-4 text-green-500" />
-                What's Working Well
+                What&apos;s Working Well
               </h3>
               <ul className="space-y-1">
                 {passedItems.map((item, i) => (

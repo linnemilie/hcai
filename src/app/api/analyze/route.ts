@@ -26,14 +26,14 @@ export async function POST(req: Request) {
     );
     const promptText = await fs.readFile(promptFilePath, "utf8");
 
-    const verificationPromptPath = path.join(
-      process.cwd(),
-      "src/app/api/analyze/prompts/verifying.txt"
-    );
-    const verificationPrompt = await fs.readFile(
-      verificationPromptPath,
-      "utf8"
-    );
+    // const verificationPromptPath = path.join(
+    //   process.cwd(),
+    //   "src/app/api/analyze/prompts/verifying.txt"
+    // );
+    // const verificationPrompt = await fs.readFile(
+    //   verificationPromptPath,
+    //   "utf8"
+    // );
 
     // Initial analysis request with option to continue the conversation
     const response = await openai.chat.completions.create({
