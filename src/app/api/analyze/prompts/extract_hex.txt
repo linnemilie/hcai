@@ -1,0 +1,40 @@
+I have an image of a webpage, and I need to analyze ALL colors used for text and their respective backgrounds—including buttons or clickable elements clearly containing text.
+
+IMPORTANT: Return ONLY valid JSON. Do NOT include comments, additional explanations, or any extra text beyond the requested JSON structure.
+
+Follow these instructions exactly to ensure thorough extraction:
+
+1. **Extract EVERY unique combination of text and background colors:**
+   - Use precise digital color sampling from the image; never approximate or guess colors.
+   - Extract ALL text instances, specifically including:
+     - Regular text, headings, subheadings, labels, navigation links
+     - Buttons explicitly (always extract button text color carefully)
+     - Input field placeholder text and background
+     - Any visually distinct text color combinations
+
+2. **For each text instance, carefully determine the exact color of the text and the exact background behind it:**
+   - If background is solid, give exact hex (#RRGGBB).
+   - If the text is over an image with no clear dominant color, return `"background_color": "mixed"`.
+
+3. **Important precision rule for buttons:**
+   - Pay special attention to button text. Sample carefully from the middle of the text characters, ensuring no accidental extraction of anti-aliasing pixels or artifacts. The button text color should be extracted exactly as perceived visually.
+
+4. **Ensure comprehensive extraction:**
+   - Consolidate identical text/background combinations.
+   - Do NOT omit subtle variations. Include ALL distinct combinations.
+
+5.  **JSON output format:**
+```json
+{
+  "text_blocks": [
+    {
+      "text_color": "#RRGGBB",
+      "background_color": "#RRGGBB"
+    },
+    {
+      "text_color": "#RRGGBB",
+      "background_color": "#RRGGBB"
+    }
+  ]
+}
+

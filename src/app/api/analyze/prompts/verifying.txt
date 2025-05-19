@@ -1,0 +1,17 @@
+Look at the image again and carefully verify your color analysis. I need you to:
+
+1. Re-examine each color in the image to confirm your extracted hex codes are precise
+2. Check for and remove any duplicate text_color/background_color combinations
+3. Merge any nearly identical colors that appear visually the same (within 3% difference)
+4. Verify backgrounds with no clear dominant color are marked as "mixed"
+5. Ensure all distinct text areas in the image have been captured
+
+Format requirements:
+- All hex codes must be in #RRGGBB format
+- Every text_block must have both text_color and background_color properties (background_color can be "mixed" when appropriate)
+- The JSON must be valid with no comments or explanations
+- No duplicate combinations allowed
+
+Compare your initial analysis with what you see in the image now. Are all colors accurate? Are there backgrounds that should be "mixed"? Are there duplicates that should be removed?
+
+Return ONLY the corrected JSON with no explanatory text or code blocks around it.
